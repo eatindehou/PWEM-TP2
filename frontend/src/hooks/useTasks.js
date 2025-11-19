@@ -7,9 +7,21 @@ export function useTasks() {
         try {
             setLoading(true);
             // TODO: Appeler l'API pour récupérer les tâches
+            const response = await fetch('api/tasks.php');
+
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement des tâches');
+            }
+
+            const json = await response.json();
+            console.log(json);
             // TODO: Mettre à jour le state tasks
+            displayTasks(json);
+            updateChart(json);
         } catch (err) {
             // TODO: Gérer l'erreur
+            console.error('Erreur:', err);
+            alert('Impossible de charger les tâches');
         } finally {
             setLoading(false);
         }
