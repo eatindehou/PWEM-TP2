@@ -1,6 +1,6 @@
 function TaskList() {
  return (
-     <div class="todo-list"></div>
+     <div className="todo-list"></div>
   );
 }
 
