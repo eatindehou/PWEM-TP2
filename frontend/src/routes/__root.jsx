@@ -8,6 +8,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
+      <div className='todo-app'>
       <header>
         <nav>
           <Link to="/" style={{marginRight: '20px'}}>Tâches</Link>
@@ -15,6 +16,7 @@ function RootComponent() {
         </nav>
       </header>
       <Outlet />
+      </div>
     </React.Fragment>
   )
 }

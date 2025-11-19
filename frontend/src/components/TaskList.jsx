@@ -1,6 +1,21 @@
+import React from "react";
+import TaskItem from "./TaskItem";
+import { useTasks } from "../hooks/useTasks";
+
 function TaskList() {
+
+    const { tasks, loading, error, loadTasks } = useTasks();
  return (
-     <div class="todo-list"></div>
+     <div className="todo-list">
+        {tasks.map(task => (
+        <TaskItem
+          key={task.id}
+          title={task.title}
+          date={task.date}
+          completed={task.completed}
+        />
+      ))}
+     </div>
   );
 }
 
