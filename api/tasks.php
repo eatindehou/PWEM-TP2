@@ -9,7 +9,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 $host = 'localhost';
 $dbname = 'todo_app';
 $username = 'root';
-$password = '';
+$password = 'root';
 
 // Connexion à la base de données
 try {
