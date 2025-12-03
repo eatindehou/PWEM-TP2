@@ -12,7 +12,11 @@ export function useTasks() {
         try {
             setLoading(true);
             // TODO: Appeler l'API pour récupérer les tâches
+<<<<<<< HEAD
             const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php');
+=======
+            const response = await fetch('http://localhost:8888/PROGSPEC/PWEM-TP2/api/tasks.php');
+>>>>>>> df187aa758ed4351bf77e724f0e9f8e549988b34
 
             if (!response.ok) {
                 throw new Error('Erreur lors du chargement des tâches');
@@ -21,12 +25,11 @@ export function useTasks() {
             const json = await response.json();
             console.log(json);
             // TODO: Mettre à jour le state tasks
-            displayTasks(json);
-            updateChart(json);
+            setTasks(json);
         } catch (err) {
             // TODO: Gérer l'erreur
             console.error('Erreur:', err);
-            alert('Impossible de charger les tâches');
+            setError(err);
         } finally {
             setLoading(false);
         }

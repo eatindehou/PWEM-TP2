@@ -1,0 +1,17 @@
+function TaskItem({ title, date, completed }) {
+  return (
+    <div className="todo-item">
+      <input type="checkbox" className="todo-item__checkbox" checked={completed}/>
+      <div className="todo-item__content">
+        <div className="todo-item__title">{title}</div>
+        <div className="todo-item__date">{date}</div>
+      </div>
+      <div className="todo-item__actions">
+        <button className="todo-item__button todo-item__button--edit">Modifier</button>
+        <button className="todo-item__button todo-item__button--delete">Supprimer</button>
+      </div>
+    </div>
+  );
+}
+
+export default TaskItem;

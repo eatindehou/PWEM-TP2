@@ -5,5 +5,7 @@ export const Route = createFileRoute('/stats/')({
 })
 
 function RouteComponent() {
-  return <div>Page statistiques</div>
+  return <div className="todo-stats">
+            <canvas id="todo-stats__chart"></canvas>
+        </div>
 }
