@@ -4,18 +4,20 @@ import { useTasks } from "../hooks/useTasks";
 
 function TaskList() {
 
-    const { tasks, loading, error, loadTasks } = useTasks();
- return (
-     <div className="todo-list">
-        {tasks.map(task => (
+  const { tasks, loading, error, loadTasks, toggleTask } = useTasks();
+  return (
+    <div className="todo-list">
+      {tasks.map(task => (
         <TaskItem
-          key={task.id}
+          id={task.id}
           title={task.title}
           date={task.date}
-          completed={task.completed}
+          completed={task.is_completed === 1}
+          toggleTask={toggleTask}
         />
+
       ))}
-     </div>
+    </div>
   );
 }
 
