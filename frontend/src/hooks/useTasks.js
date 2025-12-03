@@ -12,7 +12,7 @@ export function useTasks() {
         try {
             setLoading(true);
             // TODO: Appeler l'API pour récupérer les tâches
-            const response = await fetch('http://localhost:8888/pwem_spec/PWEM-TP2/api/tasks.php');
+            const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php');
 
             if (!response.ok) {
                 throw new Error('Erreur lors du chargement des tâches');
