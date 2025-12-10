@@ -25,6 +25,8 @@ function TaskForm(props) {
         <button onClick={(e) => {
           e.preventDefault();
           props.onAdd(title, dueDate);
+          setTitle('');
+          setdueDate('');
         }} className="todo-form__button" type="submit" id="ajout">
           Ajouter
         </button>

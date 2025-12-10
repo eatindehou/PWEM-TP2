@@ -8,6 +8,7 @@ export function useTasks() {
     // Charger toutes les tâches
     const loadTasks = React.useCallback(async () => {
         try {
+            console.log('fggg')
             setLoading(true);
             // TODO: Appeler l'API pour récupérer les tâches
             const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php');
@@ -17,7 +18,7 @@ export function useTasks() {
             }
 
             const json = await response.json();
-            console.log(json);
+            // console.log(json);
             // TODO: Mettre à jour le state tasks
             setTasks(json);
         } catch (err) {
@@ -30,15 +31,13 @@ export function useTasks() {
     }, []);
     //  Ajouter une tâche
     const addTask = React.useCallback(async (title, dueDate) => {
-        const promesse = new Promise(resolve => setTimeout(resolve, 1000));
-        await promesse;
-        console.log({ title, dueDate })
+        // console.log({ title, dueDate })
         // TODO: Valider les données
         let letitleEntree = null;
 
         // 3. Valider les données
         if (title !== "") {
-            console.log(title)
+            // console.log(title)
             letitleEntree = title;
         }
         else {
@@ -55,7 +54,7 @@ export function useTasks() {
         // TODO: Appeler l'API POST
         try {
             // 5. Envoyer la requête POST
-            console.log(taskData);
+            // console.log(taskData);
             const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php', {
                 method: 'POST',
                 headers: {
@@ -72,8 +71,8 @@ export function useTasks() {
             title = "";
             laDateEntree = "";
             // 7. Recharger la liste des tâches (appeler la fonction loadTasks)
-            console.log("la tâche à été ajoutée !")
-            await loadTasks()
+            // console.log("la tâche à été ajoutée !")
+            loadTasks()
         } catch (error) {
             console.error('Erreur:', error);
             alert('Impossible d\'ajouter la tâche ! Veuillez entrer un nom de tâche !');
