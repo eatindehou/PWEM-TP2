@@ -129,6 +129,28 @@ export function useTasks() {
         // TODO: Demander confirmation
         // TODO: Appeler l'API DELETE
         // TODO: Mettre à jour le state
+
+         confirm("Êtes-vous certain de vouloir supprimer cette tâche?");
+
+    try {
+        const task = tasks.find(task => task.id === taskId);
+        if (!task) return; 
+
+         const response = await fetch(`api/tasks.php?id=${taskId}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de la suppression');
+        }
+
+        // loadTasks();
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert('Impossible de supprimer la tâche');
+    }
+
+
     }, []);
     React.useEffect(() => {
         loadTasks();
