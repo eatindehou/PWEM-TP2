@@ -63,7 +63,7 @@ export function useTasks() {
         }
         // TODO: Rafraîchir la liste
     }, []);
-    
+
     // Modifier le statut d'une tâche
     const toggleTask = React.useCallback(async (taskId) => {
         try {
@@ -111,36 +111,31 @@ export function useTasks() {
     }, []);
     // Supprimer une tâche
     const deleteTask = React.useCallback(async (taskId) => {
-        // TODO: Demander confirmation
-        // TODO: Appeler l'API DELETE
-        // TODO: Mettre à jour le state
 
-    if (!confirm("Êtes-vous certain de vouloir supprimer cette tâche?")) {
-        return;
-    }
+        if (!confirm("Êtes-vous certain de vouloir supprimer cette tâche?")) {
+            return;
+        }
 
-   try {
-    const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
-        method: 'DELETE'
-    });
+        try {
+            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+                method: 'DELETE'
+            });
 
-    const text = await response.text();
-    console.log("Réponse API :", response.status, text);
+            if (!response.ok) {
+                throw new Error('Erreur lors de la suppression : ' + text);
+            }
 
-    if (!response.ok) {
-        throw new Error('Erreur lors de la suppression : ' + text);
-    }
+            setTasks(prev => prev.filter(task => task.id !== taskId));
 
-    setTasks(prev => prev.filter(task => task.id === taskId));
-    
-} catch (error) {
-    console.error('Erreur:', error);
-    alert('Impossible de supprimer la tâche');
-}
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Impossible de supprimer la tâche');
+        }
 
 
 
     }, []);
+
     React.useEffect(() => {
         loadTasks();
     }, [loadTasks]);
