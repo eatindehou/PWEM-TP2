@@ -21,6 +21,17 @@ export function useTasks() {
             // console.log(json);
             // TODO: Mettre à jour le state tasks
             setTasks(json);
+
+            const dateElements = document.querySelectorAll('.todo-item__date');
+            dateElements.forEach((date, index) => {
+                const dateDeRemise = json[index].due_date;
+                if (!json[index].due_date) {
+                    date.textContent = "Aucune échéance"
+                }
+                else {
+                    date.textContent = formatDate(dateDeRemise);
+                }
+            });
         } catch (err) {
             // TODO: Gérer l'erreur
             console.error('Erreur:', err);
@@ -64,6 +75,18 @@ export function useTasks() {
         // TODO: Rafraîchir la liste
     }, []);
 
+    /**
+     * Formate une date au format YYYY-MM-DD en format lisible
+     * @param {string} dateString - Date au format YYYY-MM-DD
+     * @returns {string} Date formatée
+     */
+    function formatDate(dateString) {
+        if (!dateString) return '';
+
+        const date = new Date(dateString + 'T00:00:00'); // Ajouter l'heure pour éviter les problèmes de fuseau horaire
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('fr-CA', options);
+    }
     // Modifier le statut d'une tâche
     const toggleTask = React.useCallback(async (taskId) => {
         try {
