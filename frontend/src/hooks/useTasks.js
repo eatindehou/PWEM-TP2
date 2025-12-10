@@ -31,30 +31,17 @@ export function useTasks() {
     }, []);
     //  Ajouter une tâche
     const addTask = React.useCallback(async (title, dueDate) => {
-        // console.log({ title, dueDate })
         // TODO: Valider les données
-        let letitleEntree = null;
 
-        // 3. Valider les données
-        if (title !== "") {
-            // console.log(title)
-            letitleEntree = title;
-        }
-        else {
-            console.log('il est completement vide !')
-        }
-        let laDateEntree = dueDate;
-
-        // 4. Préparer les données à envoyer
+        // 1. Préparer les données à envoyer
         const taskData = {
-            title: letitleEntree,
-            due_date: laDateEntree || null,
+            title: title,
+            due_date: dueDate || null,
             is_completed: false
         };
         // TODO: Appeler l'API POST
         try {
-            // 5. Envoyer la requête POST
-            // console.log(taskData);
+            // 2. Envoyer la requête POST
             const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php', {
                 method: 'POST',
                 headers: {
@@ -67,10 +54,7 @@ export function useTasks() {
                 throw new Error('Erreur lors de l\'ajout de la tâche');
             }
 
-            // 6. Réinitialiser le formulaire
-            title = "";
-            laDateEntree = "";
-            // 7. Recharger la liste des tâches (appeler la fonction loadTasks)
+            // 3. Recharger la liste des tâches (appeler la fonction loadTasks)
             // console.log("la tâche à été ajoutée !")
             loadTasks()
         } catch (error) {
@@ -101,17 +85,19 @@ export function useTasks() {
                 throw new Error("Erreur lors de la modification");
             }
 
+            console.log("before", tasks);
             setTasks(Tasks =>
                 Tasks.map(task =>
                     task.id === taskId ? {
                         id: task.id,
                         title: task.title,
-                        date: task.date,
+                        due_date: task.date,
                         is_completed: newStatus
                     } : task
                 )
             );
-
+            console.log("after", tasks);
+            loadTasks();
         } catch (error) {
             console.error("Erreur:", error);
             alert("Impossible de modifier la tâche");

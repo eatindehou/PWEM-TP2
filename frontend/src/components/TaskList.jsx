@@ -1,10 +1,8 @@
 import React from "react";
 import TaskItem from "./TaskItem";
-import { useTasks } from "../hooks/useTasks";
 
 function TaskList(props) {
 
-  const { toggleTask } = useTasks();
   return (
     <div className="todo-list">
       {props.tasks.map(task => (
@@ -14,7 +12,7 @@ function TaskList(props) {
           title={task.title}
           date={task.due_date}
           completed={task.is_completed === 1}
-          toggleTask={toggleTask}
+          onToggle={props.onToggle}
         />
 
       ))}
