@@ -11,7 +11,7 @@ function TaskList() {
         <TaskItem
           id={task.id}
           title={task.title}
-          date={task.date}
+          date={task.due_date}
           completed={task.is_completed === 1}
           toggleTask={toggleTask}
         />

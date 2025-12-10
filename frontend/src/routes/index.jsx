@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  const { addTask } = useTasks();
+  const { addTask} = useTasks();
 
   return (
   <div>

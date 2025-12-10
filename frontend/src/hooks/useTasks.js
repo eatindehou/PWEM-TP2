@@ -73,7 +73,7 @@ export function useTasks() {
             laDateEntree = "";
             // 7. Recharger la liste des tâches (appeler la fonction loadTasks)
             console.log("la tâche à été ajoutée !")
-            loadTasks()
+            await loadTasks()
         } catch (error) {
             console.error('Erreur:', error);
             alert('Impossible d\'ajouter la tâche ! Veuillez entrer un nom de tâche !');
