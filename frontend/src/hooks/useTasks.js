@@ -80,12 +80,45 @@ export function useTasks() {
         }
         // TODO: Rafraîchir la liste
     }, []);
+    
     // Modifier le statut d'une tâche
     const toggleTask = React.useCallback(async (taskId) => {
-        // TODO: Trouver la tâche actuelle
-        // TODO: Appeler l'API PUT avec le nouveau statut
-        // TODO: Mettre à jour le state
+        try {
+
+            const task = tasks.find(task => task.id === taskId);
+            if (!task) return;
+
+            const newStatus = task.is_completed ? 0 : 1;
+
+            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ is_completed: newStatus })
+            });
+
+            if (!response.ok) {
+                throw new Error("Erreur lors de la modification");
+            }
+
+            setTasks(Tasks =>
+                Tasks.map(task =>
+                    task.id === taskId ? {
+                        id: task.id,
+                        title: task.title,
+                        date: task.date,
+                        is_completed: newStatus
+                    } : task
+                )
+            );
+
+        } catch (error) {
+            console.error("Erreur:", error);
+            alert("Impossible de modifier la tâche");
+        }
     }, [tasks]);
+
     // Modifier une tâche
     const editTask = React.useCallback(async (taskId, title, dueDate) => {
         // TODO: Appeler l'API PUT
