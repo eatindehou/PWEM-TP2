@@ -108,6 +108,36 @@ export function useTasks() {
     const editTask = React.useCallback(async (taskId, title, dueDate) => {
         // TODO: Appeler l'API PUT
         // TODO: Mettre à jour le state
+        const newTitle = prompt('Nouveau titre:', title);
+
+        if (newTitle === null || newTitle.trim() === '') {
+            return; // L'utilisateur a annulé
+        }
+
+        const newDate = prompt('Nouvelle date (YYYY-MM-DD):', dueDate || '');
+        try {
+            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: newTitle.trim(),
+                    due_date: newDate || null
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Erreur lors de la modification');
+            }
+
+            loadTasks();
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Impossible de modifier la tâche');
+        }
+
+
     }, []);
     // Supprimer une tâche
     const deleteTask = React.useCallback(async (taskId) => {

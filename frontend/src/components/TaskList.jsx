@@ -14,6 +14,7 @@ function TaskList(props) {
           completed={task.is_completed === 1}
           onToggle={props.onToggle}
           onDelete={props.onDelete}
+          onEdit={props.onEdit}
         />
 
       ))}
