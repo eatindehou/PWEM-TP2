@@ -5,8 +5,6 @@ export function useTasks() {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
     let taskChart = null;
-    // const btnAjouter = document.querySelector('.todo-form__button');
-    // btnAjouter.addEventListener('click', addTask)
     // Charger toutes les tâches
     const loadTasks = React.useCallback(async () => {
         try {
@@ -46,7 +44,7 @@ export function useTasks() {
         else {
             console.log('il est completement vide !')
         }
-        const laDateEntree = date;
+        let laDateEntree = dueDate;
 
         // 4. Préparer les données à envoyer
         const taskData = {
@@ -57,7 +55,8 @@ export function useTasks() {
         // TODO: Appeler l'API POST
         try {
             // 5. Envoyer la requête POST
-            const response = await fetch('api/tasks.php', {
+            console.log(taskData);
+            const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -71,10 +70,10 @@ export function useTasks() {
 
             // 6. Réinitialiser le formulaire
             title = "";
-            date = "";
+            laDateEntree = "";
             // 7. Recharger la liste des tâches (appeler la fonction loadTasks)
             console.log("la tâche à été ajoutée !")
-            // loadTasks()
+            loadTasks()
         } catch (error) {
             console.error('Erreur:', error);
             alert('Impossible d\'ajouter la tâche ! Veuillez entrer un nom de tâche !');

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTasks } from '@/hooks/useTasks'
-function TaskForm() {
+function TaskForm(props) {
   const { addTask } = useTasks();
   const [title, setTitle] = useState('');
   const [dueDate, setdueDate] = useState('');
@@ -24,7 +24,7 @@ function TaskForm() {
         />
         <button onClick={(e) => {
           e.preventDefault();
-          addTask(title, dueDate);
+          props.onAdd={addTask};
         }} className="todo-form__button" type="submit" id="ajout">
           Ajouter
         </button>
