@@ -1,4 +1,4 @@
-function TaskItem({ id, title, date, completed, onToggle }) {
+function TaskItem({ id, title, date, completed, onToggle, onEdit }) {
   return (
     <div className={`todo-item ${completed ? "todo-item--completed" : ""}`}>
       <input type="checkbox" className="todo-item__checkbox" checked={completed} onChange={() => onToggle(id)} />
@@ -7,7 +7,10 @@ function TaskItem({ id, title, date, completed, onToggle }) {
         <div className="todo-item__date">{date}</div>
       </div>
       <div className="todo-item__actions">
-        <button className="todo-item__button todo-item__button--edit">Modifier</button>
+        <button onClick={(e) => {
+          e.preventDefault();
+          onEdit(id,title, date);
+        }} className="todo-item__button todo-item__button--edit">Modifier</button>
         <button className="todo-item__button todo-item__button--delete">Supprimer</button>
       </div>
     </div>

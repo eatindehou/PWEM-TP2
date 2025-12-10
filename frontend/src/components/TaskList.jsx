@@ -13,6 +13,7 @@ function TaskList(props) {
           date={task.due_date}
           completed={task.is_completed === 1}
           onToggle={props.onToggle}
+          onEdit={props.onEdit}
         />
 
       ))}
