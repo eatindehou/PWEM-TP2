@@ -10,9 +10,9 @@ function RootComponent() {
     <React.Fragment>
       <div className='todo-app'>
       <header>
-        <nav>
-          <Link to="/" style={{marginRight: '20px'}}>Tâches</Link>
-          <Link to="/stats">Statistiques</Link>
+        <nav style={{marginTop: '30px'}}>
+          <Link to="/" style={{marginRight: '20px', marginLeft: '30px', color: 'orange'}}>Tâches</Link>
+          <Link to="/stats" style={{color: 'orange'}}>Statistiques</Link>
         </nav>
       </header>
       <Outlet />

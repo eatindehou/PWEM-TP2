@@ -8,12 +8,12 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  const { addTask} = useTasks();
+  const { tasks, addTask} = useTasks();
 
   return (
   <div>
     <TaskForm onAdd={addTask} />
-    <TaskList />
+    <TaskList tasks={tasks} />
   </div>
   )
 }

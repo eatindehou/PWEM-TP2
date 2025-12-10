@@ -2,13 +2,14 @@ import React from "react";
 import TaskItem from "./TaskItem";
 import { useTasks } from "../hooks/useTasks";
 
-function TaskList() {
+function TaskList(props) {
 
-  const { tasks, loading, error, loadTasks, toggleTask, deleteTask } = useTasks();
+  const { toggleTask, deleteTask } = useTasks();
   return (
     <div className="todo-list">
-      {tasks.map(task => (
+      {props.tasks.map(task => (
         <TaskItem
+          key={task.id}
           id={task.id}
           title={task.title}
           date={task.due_date}
