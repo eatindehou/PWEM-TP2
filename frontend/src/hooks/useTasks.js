@@ -8,20 +8,18 @@ export function useTasks() {
     // Charger toutes les tâches
     const loadTasks = React.useCallback(async () => {
         try {
-            console.log('fggg')
             setLoading(true);
             // TODO: Appeler l'API pour récupérer les tâches
-            const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php');
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888/PWEM-TP2/api';
+            const response = await fetch(`${API_URL}/tasks.php`);
 
             if (!response.ok) {
                 throw new Error('Erreur lors du chargement des tâches');
             }
 
             const json = await response.json();
-            // console.log(json);
             // TODO: Mettre à jour le state tasks
             setTasks(json);
-
             const dateElements = document.querySelectorAll('.todo-item__date');
             dateElements.forEach((date, index) => {
                 const dateDeRemise = json[index].due_date;
@@ -32,6 +30,7 @@ export function useTasks() {
                     date.textContent = formatDate(dateDeRemise);
                 }
             });
+
         } catch (err) {
             // TODO: Gérer l'erreur
             console.error('Erreur:', err);
@@ -64,7 +63,6 @@ export function useTasks() {
             if (!response.ok) {
                 throw new Error('Erreur lors de l\'ajout de la tâche');
             }
-
             // 3. Recharger la liste des tâches (appeler la fonction loadTasks)
             // console.log("la tâche à été ajoutée !")
             loadTasks();
@@ -108,7 +106,6 @@ export function useTasks() {
                 throw new Error("Erreur lors de la modification");
             }
 
-            console.log("before", tasks);
             setTasks(Tasks =>
                 Tasks.map(task =>
                     task.id === taskId ? {
@@ -119,7 +116,6 @@ export function useTasks() {
                     } : task
                 )
             );
-            console.log("after", tasks);
             loadTasks();
         } catch (error) {
             console.error("Erreur:", error);
