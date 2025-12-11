@@ -52,7 +52,7 @@ export function useTasks() {
         // TODO: Appeler l'API POST
         try {
             // 2. Envoyer la requête POST
-            const response = await fetch('http://localhost:8888/PWEM-TP2/api/tasks.php', {
+            const response = await fetch(`${API_URL}/tasks.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export function useTasks() {
 
             const newStatus = task.is_completed ? 0 : 1;
 
-            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+            const response = await fetch(`${API_URL}/tasks.php?id=${taskId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -135,7 +135,7 @@ export function useTasks() {
 
         const newDate = prompt('Nouvelle date (YYYY-MM-DD):', dueDate || '');
         try {
-            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+            const response = await fetch(`${API_URL}/tasks.php?id=${taskId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ export function useTasks() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8888/PWEM-TP2/api/tasks.php?id=${taskId}`, {
+            const response = await fetch(`${API_URL}/tasks.php?id=${taskId}`, {
                 method: 'DELETE'
             });
 
