@@ -19,9 +19,9 @@ cd frontend && npm install && npm run dev
 - Utilisez l'application pour gérer vos tâches
 ## Déploiement
 L'application est déployée sur Vercel à l'adresse :
-**[Insérez votre URL Vercel ici]**
+**[https://pwem-tp-2.vercel.app/]**
 L'API distante est hébergée sur notre dossier équipe Timunix3:
-**[Insérez votre URL ici]**
+**[https://timunix3.csfoy.ca/~sugarswirls]**
 ## Structure du projet
 -
 `api/`
