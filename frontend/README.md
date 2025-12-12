@@ -24,27 +24,33 @@ L'API distante est hébergée sur notre dossier équipe Timunix3:
 **[Insérez votre URL ici]**
 ## Structure du projet
 -
--
-`
-api/`
+`api/`
 : Backend PHP
+- task.php
+
 `frontend/`
 : Frontend React
-`
--
-src/`
-: Code source React
-`
--
-components/`
+- `src/: Code source React`
+
+`components/`
 : Composants réutilisables
--
+- TaskForm.jsx
+- TaskItem.jsx
+- TaskList.jsx
+- TaskStats.jsx
+
 `hooks/`
-: Hooks personnalisés
-`
--
-routes/`
+- useTasks.js
+
+`routes/`
 : Pages et configuration routeur
+- `stats/`
+   - index.jsx
+- __root.jsx
+- index.jsx
+- App.jsx
+- main.jsx
+- routeTree.gen.ts
 ## Technologies utilisées
 - React 18
 - Vite
